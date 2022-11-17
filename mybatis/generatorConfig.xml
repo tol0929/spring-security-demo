@@ -1,0 +1,19 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+ "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+ "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="dsql" targetRuntime="MyBatis3DynamicSql">
+    <jdbcConnection driverClass="org.postgresql.Driver"
+        connectionURL="jdbc:postgresql://localhost:5432"
+        userId="postgres"
+        password="postgres" />
+
+    <javaModelGenerator targetPackage="com.example.springsecuritydemo" targetProject="src/main/java"/>
+
+    <javaClientGenerator targetPackage="com.example.springsecuritydemo" targetProject="src/main/java"/>
+
+    <table tableName="login_user" />
+    <table tableName="roles" />
+    <table tableName="user_role" />
+  </context>
+</generatorConfiguration>

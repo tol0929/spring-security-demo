@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TOP</title>
+    </head>
+    <body>
+        <h1>TOP Page</h1>
+        <p sec:authorize="hasRole('ADMIN')">ADMIN権限です</p>
+        <p sec:authorize="hasRole('GENERAL')">GENERAL権限です</p>
+
+        <p><a th:href="@{/general}">only general</a></p>
+        <p><a th:href="@{/admin}">only admin</a></p>
+        <p><a th:href="@{/logout}">logout</a></p>
+    </body>
+</html>

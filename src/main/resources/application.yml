@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring_security_demo
+    username: postgres
+    password: postgres
+logging:
+  level:
+    root: INFO
+    com:
+      example:
+        springsecuritydemo: DEBUG
+      zaxxer:
+        hikari:
+          HikariDataSource: WARN
