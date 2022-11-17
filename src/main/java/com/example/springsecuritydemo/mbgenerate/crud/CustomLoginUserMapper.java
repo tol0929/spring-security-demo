@@ -32,7 +32,7 @@ public interface CustomLoginUserMapper extends LoginUserMapper {
             @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
             @Result(column = "email", property = "email", jdbcType = JdbcType.VARCHAR),
             @Result(column = "password", property = "password", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "roles_*", property = "")
+            @Result(column = "role_id", property = "roleId")
     })
     List<LoginUser> selectLoginUserRolesEntity2(SelectStatementProvider selectStatement);
 }

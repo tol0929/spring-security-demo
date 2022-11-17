@@ -2,22 +2,23 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-  <context id="mbSpringSecurityDemo" targetRuntime="MyBatis3DynamicSql">
-    <commentGenerator>
-      <property name="suppressAllComments" value="true"/>
-    </commentGenerator>
-    <jdbcConnection driverClass="org.postgresql.Driver"
-                    connectionURL="jdbc:postgresql://localhost:5432/spring_security_demo"
-                    userId="postgres"
-                    password="postgres" />
-    <!-- PostgreSQLのTIMESTAMP型をJavaのLocalDateTimeへマッピングする  -->
-    <javaTypeResolver>
-      <property name="useJSR310Types" value="true"/>
-    </javaTypeResolver>
-    <javaModelGenerator targetPackage="com.example.springsecuritydemo.mbgenerate.entity" targetProject="src/main/java" />
-    <javaClientGenerator targetPackage="com.example.springsecuritydemo.mbgenerate.crud"
-                         targetProject="src/main/java" type="ANNOTATEDMAPPER" />
+    <context id="mbSpringSecurityDemo" targetRuntime="MyBatis3DynamicSql">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://localhost:5432/spring_security_demo"
+                        userId=""
+                        password=""/>
+        <!-- PostgreSQLのTIMESTAMP型をJavaのLocalDateTimeへマッピングする  -->
+        <javaTypeResolver>
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="com.example.springsecuritydemo.mbgenerate.entity"
+                            targetProject="src/main/java"/>
+        <javaClientGenerator targetPackage="com.example.springsecuritydemo.mbgenerate.crud"
+                             targetProject="src/main/java" type="ANNOTATEDMAPPER"/>
 
-    <table schema="public" tableName="%" />
-  </context>
+        <table schema="public" tableName="%"/>
+    </context>
 </generatorConfiguration>
