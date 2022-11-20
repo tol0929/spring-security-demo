@@ -1,5 +1,6 @@
 # spring-security-demo
-SpringSecurity勉強用
+SpringSecurity勉強用  
+参考：[最新の5.7で学ぶ!初めてのひとのための Spring Security](https://www.docswell.com/s/MasatoshiTada/KGVY9K-spring-security-intro)
 
 # 技術要件
 ## Java
