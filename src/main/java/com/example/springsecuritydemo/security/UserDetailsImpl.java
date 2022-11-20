@@ -1,6 +1,6 @@
 package com.example.springsecuritydemo.security;
 
-import com.example.springsecuritydemo.record.LoginUserRecord;
+import com.example.springsecuritydemo.record.LoginUserDto;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,12 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class LoginUserDetails implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
     @Getter
-    private final LoginUserRecord loginUser;
+    private final LoginUserDto loginUser;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public LoginUserDetails(final LoginUserRecord loginUser) {
+    public UserDetailsImpl(final LoginUserDto loginUser) {
         this.loginUser = loginUser;
         this.authorities = loginUser.roleList()
                 .stream()
