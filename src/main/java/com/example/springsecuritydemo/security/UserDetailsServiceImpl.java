@@ -18,8 +18,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     /**
      * ログインユーザー読み込み
      *
-     * @param username 画面から渡されるlogin_user.id
-     * @return login_user
+     * @param username 画面から渡されるlogin_user.email
+     * @return UserDetailsImpl
      *
      * @throws UsernameNotFoundException ユーザーが見つからない場合
      */
