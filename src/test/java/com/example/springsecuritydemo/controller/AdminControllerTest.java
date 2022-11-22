@@ -1,17 +1,16 @@
 package com.example.springsecuritydemo.controller;
 
 import com.example.springsecuritydemo.Admin;
-import com.example.springsecuritydemo.mbgenerate.crud.CustomLoginUserMapper;
-import com.example.springsecuritydemo.mbgenerate.crud.LoginUserMapper;
+import com.example.springsecuritydemo.General;
+import com.example.springsecuritydemo.mbgenerate.entity.LoginUserAndRoleNameEntity;
 import com.example.springsecuritydemo.repository.LoginUserRepository;
 import com.example.springsecuritydemo.security.SecurityConfig;
 import com.example.springsecuritydemo.security.UserDetailsServiceImpl;
-import com.example.springsecuritydemo.service.SampleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureJdbc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,6 +19,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
+
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -28,25 +30,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(includeFilters = @ComponentScan.Filter(
         type = FilterType.ASSIGNABLE_TYPE,
         classes = {UserDetailsServiceImpl.class,
-                LoginUserRepository.class,
                 SecurityConfig.class,
-                LoginUserMapper.class,
-                CustomLoginUserMapper.class
         }
 )
 )
-//@SpringBootTest(classes = AdminControllerTest.class)
-@AutoConfigureJdbc
+//@AutoConfigureJdbc
 public class AdminControllerTest {
-    @Autowired
-    WebApplicationContext webApplicationContext;
-    @MockBean
-    SampleService sampleService;
-    //    @MockBean
-//    LoginUserMapper loginUserMapper;
-//    @MockBean
-//    CustomLoginUserMapper customLoginUserMapper;
     private MockMvc mockMvc;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
+    @InjectMocks
+    private UserDetailsServiceImpl userDetailsServiceImpl;
+    @MockBean
+    private LoginUserRepository loginUserRepository;
 
     @BeforeEach
     void setup() {
@@ -57,14 +54,23 @@ public class AdminControllerTest {
     @Admin
     @DisplayName("ROLE_ADMINが管理者専用画面にアクセスできること")
     public void adminTest() throws Exception {
-        final var actuaL = mockMvc.perform(get("/admin"));
+        doReturn(List.of(LoginUserAndRoleNameEntity.builder()
+                .name("admin")
+                .email("admin@example.com")
+                .password("$2a$10$SJTWvNl16fCU7DaXtWC0DeN/A8IOakpCkWWNZ/FKRV2CHvWElQwMS")
+                .roleName("ROLE_ADMIN"))
+        ).when(loginUserRepository).selectLoginUserAndRoleNameRecordByEmail("admin@example.com");
+
+//        final var loginUserRepositoryFromCOntext = webApplicationContext.getBean(LoginUserRepository.class);
+//        final var res = loginUserRepositoryFromCOntext.selectLoginUserAndRoleNameRecordByEmail("admin@example.com");
+
         mockMvc.perform(get("/admin"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("admin"));
     }
 
     @Test
-//    @General
+    @General
     @DisplayName("ROLE_GENERALは管理者専用画面にアクセスできないこと")
     public void generalTest() throws Exception {
         mockMvc.perform(get("/admin"))

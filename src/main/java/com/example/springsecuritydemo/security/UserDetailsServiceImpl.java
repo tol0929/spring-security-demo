@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 @Service
 @RequiredArgsConstructor
@@ -26,11 +25,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         final var loginUserAndRoleNameEntityList = loginUserRepository.selectLoginUserAndRoleNameRecordByEmail(username);
-        if (CollectionUtils.isEmpty(loginUserAndRoleNameEntityList)) {
-            throw new UsernameNotFoundException("login user not found.");
-        }
 
-        final var loginUserAndRoleEntity = loginUserAndRoleNameEntityList.get(0);
+        final var loginUserAndRoleEntity = loginUserAndRoleNameEntityList.stream().findFirst()
+                .orElseThrow(() -> new UsernameNotFoundException("login user not found. email=[%s]".formatted(username)));
         final var roles = loginUserAndRoleNameEntityList.stream().map(LoginUserAndRoleNameEntity::getRoleName).toList();
 
         return new UserDetailsImpl(

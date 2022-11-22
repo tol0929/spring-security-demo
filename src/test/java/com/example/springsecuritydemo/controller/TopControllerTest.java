@@ -16,14 +16,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 
-// = @SpringBootTest + @AutoConfigureMockMvc
-@WebMvcTest
+@WebMvcTest // = @SpringBootTest + @AutoConfigureMockMvc
 public class TopControllerTest {
-    @Autowired
-    WebApplicationContext webApplicationContext;
-    @MockBean
-    SampleService sampleService;
     private MockMvc mockMvc;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+    @MockBean
+    private SampleService sampleService;
 
     @BeforeEach
     public void setup() {
@@ -37,14 +36,4 @@ public class TopControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("top"));
     }
-
-//    @Test
-//    @DisplayName("/sampleにアクセスできること")
-//    public void sampleTest() throws Exception {
-//        final var result = mockMvc.perform(get("/sample"));
-//        final var response = result.andReturn().getResponse();
-//        mockMvc.perform(get("/sample"))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("sample"));
-//    }
 }
