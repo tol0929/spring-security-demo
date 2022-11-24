@@ -1,6 +1,7 @@
 package com.example.springsecuritydemo;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 
 import java.lang.annotation.ElementType;
@@ -15,6 +16,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Test
 @WithUserDetails(userDetailsServiceBeanName = "userDetailsServiceImpl",
-        value = "admin@example.com")
+        value = "admin@example.com",
+        setupBefore = TestExecutionEvent.TEST_EXECUTION)
 public @interface Admin {
 }
