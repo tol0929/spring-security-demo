@@ -6,8 +6,9 @@
     </head>
     <body>
         <h1>TOP Page</h1>
-        <p sec:authorize="hasRole('ADMIN')">ADMIN権限です</p>
-        <p sec:authorize="hasRole('GENERAL')">GENERAL権限です</p>
+        <!--        <p sec:authorize="hasRole('ADMIN')">ADMIN権限です</p>-->
+        <!--        <p sec:authorize="hasRole('GENERAL')">GENERAL権限です</p>-->
+        <p>ログインユーザー：<span sec:authentication="principal.loginUser.name"></span></p>
 
         <p><a th:href="@{/list}">list</a></p>
         <p><a th:href="@{/general}">only general</a></p>
