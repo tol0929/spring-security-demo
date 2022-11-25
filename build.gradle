@@ -1,56 +1,56 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.3-SNAPSHOT'
-	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
-	id 'java'
-	id 'org.springframework.experimental.aot' version '0.12.1'
+    id 'org.springframework.boot' version '3.0.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+//    id 'org.springframework.experimental.aot' version '0.12.1'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-//sourceCompatibility = '17'
+sourceCompatibility = '17'
 
 ant.importBuild 'build.xml'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	maven { url 'https://repo.spring.io/release' }
-	mavenCentral()
-	maven { url 'https://repo.spring.io/milestone' }
-	maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/release' }
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 
-	implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.0'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.0'
 
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2'
-	implementation 'org.mybatis.generator:mybatis-generator-core:1.4.1'
-	implementation 'org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.4.1'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2'
+    implementation 'org.mybatis.generator:mybatis-generator-core:1.4.1'
+    implementation 'org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.4.1'
 //	implementation 'org.mybatis:mybatis-typehandlers-jsr310:1.0.2'
-	implementation 'org.mybatis.scripting:mybatis-thymeleaf:1.0.3'
-	
+    implementation 'org.mybatis.scripting:mybatis-thymeleaf:1.0.3'
+    runtimeOnly 'org.springframework.boot:spring-boot-properties-migrator'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 tasks.named('bootBuildImage') {
-	builder = 'paketobuildpacks/builder:tiny'
-	environment = ['BP_NATIVE_IMAGE': 'true']
+    builder = 'paketobuildpacks/builder:tiny'
+    environment = ['BP_NATIVE_IMAGE': 'true']
 }

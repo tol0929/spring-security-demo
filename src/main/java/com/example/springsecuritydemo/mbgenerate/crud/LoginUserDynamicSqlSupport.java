@@ -1,9 +1,9 @@
 package com.example.springsecuritydemo.mbgenerate.crud;
 
+import jakarta.annotation.Generated;
 import org.mybatis.dynamic.sql.AliasableSqlTable;
 import org.mybatis.dynamic.sql.SqlColumn;
 
-import javax.annotation.Generated;
 import java.sql.JDBCType;
 
 public final class LoginUserDynamicSqlSupport {

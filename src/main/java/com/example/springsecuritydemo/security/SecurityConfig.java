@@ -25,10 +25,10 @@ public class SecurityConfig {
                         // css/**などのstaticなファイルは認証不要
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         // /sampleは認証不要
-                        .mvcMatchers("/sample").permitAll()
+                        .requestMatchers("/sample").permitAll()
                         // ロール設定
-                        .mvcMatchers("/general").hasRole("GENERAL")
-                        .mvcMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/general").hasRole("GENERAL")
+                        .requestMatchers("/admin").hasRole("ADMIN")
                         // 上記以外は要認証
                         .anyRequest().authenticated());
         return http.build();

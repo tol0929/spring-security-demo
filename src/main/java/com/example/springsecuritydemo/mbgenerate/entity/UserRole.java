@@ -1,6 +1,6 @@
 package com.example.springsecuritydemo.mbgenerate.entity;
 
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 
 public class UserRole {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
